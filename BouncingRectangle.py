@@ -19,6 +19,16 @@ clock = pygame.time.Clock()
 # ---------------------------
 # Initialize global variables
 
+# Rectangle
+## Location
+rect_x = 50
+rect_y = 50
+
+## Speed
+rect_speed_x = 10
+rect_speed_y = 10
+
+
 # Colours
 black = (0, 0, 0)
 white = (255, 255, 255)
@@ -30,6 +40,7 @@ white = (255, 255, 255)
 
 
 # ---------------------------
+screen.fill(white)
 
 # --------------- Main program loop ---------------
 running = True
@@ -42,12 +53,23 @@ while running:
     # ----- GAME STATE UPDATES -----
     # All game math and comparisons happen here
 
-    
+    # Update rectangle location 
+    rect_x += rect_speed_x
+    rect_y += rect_speed_y
+
+    # Change rectangle x direction when colliding with edge
+    if rect_x > (WIDTH - 50) or rect_x < 0:
+       rect_speed_x *= -1
+
+     # Change rectangle y direction when colliding with edge
+    if rect_y > (HEIGHT - 50) or rect_y < 0:
+       rect_speed_y *= -1
+
     # ----- DRAWING -----
-    screen.fill(white)  # always the first drawing command
+    # screen.fill(white)  # always the first drawing command
 
     # Rectangle
-    pygame.draw.rect(screen, black, [50, 50, 50, 50])
+    pygame.draw.rect(screen, black, [rect_x, rect_y, 50, 50])
 
     # Must be the last two lines of the game loop
     pygame.display.flip()
